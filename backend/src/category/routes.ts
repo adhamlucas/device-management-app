@@ -9,5 +9,6 @@ const categoryController = new CategoryController(categoryService);
 
 router.get('/', categoryController.getAllCategories);
 router.post('/', categoryController.postCategory);
+router.delete('/:id', categoryController.deleteCategory)
 
 export default router;
