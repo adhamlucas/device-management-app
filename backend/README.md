@@ -26,3 +26,8 @@ To execute the project:
 ```
 npm run dev
 ```
+
+To verify the project consistency with unit tests, executing jest:
+```
+npm run test
+```

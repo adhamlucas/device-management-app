@@ -12,19 +12,19 @@ class CategoryController {
 
   async getAllCategories(req: Request, res: Response) {
     const categories = await this.categoryService.findAll();
-    res.json(categories); 
+    res.status(200).json(categories); 
   }
 
   async postCategory(req: Request, res: Response) {
     // add verification and a good parser of request body
     const result = await this.categoryService.create(req.body.name)
-    res.json(result)
+    res.status(200).json(result)
   }
 
   async deleteCategory(req: Request, res: Response) {
-    // add verification and a good parser of request parameters
     const id = parseInt(req.params.id)
-    res.json(await this.categoryService.delete(id))
+    const category = await this.categoryService.delete(id)
+    res.status(200).json(category)
   }
 }
 
