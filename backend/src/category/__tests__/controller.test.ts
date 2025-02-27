@@ -2,7 +2,7 @@ jest.mock("@prisma/client")
 import { Request, Response } from "express"
 import CategoryController from "../controller"
 import CategoryService from "../service"
-import { mockCategoryFindMany, mockCreateCategory, mockDeleteCategory } from "../__mocks__/@prisma/client"
+import { mockCategoryFindMany, mockCreateCategory, mockDeleteCategory } from "../../__mocks__/@prisma/client"
 
 const categoryService = new CategoryService()
 const categoryController = new CategoryController(categoryService)
