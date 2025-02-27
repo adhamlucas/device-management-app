@@ -1,6 +1,6 @@
 import express from 'express';
 import CategoryController from './controller';
-import CategoryService from './services';
+import CategoryService from './service';
 import { requestValidation } from '../handlers/requestValidator';
 import { getAllCategoriesSchema, deleteCategorySchema } from './schema';
 
