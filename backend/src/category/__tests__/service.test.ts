@@ -1,6 +1,6 @@
 jest.mock("@prisma/client")
 import CategoryService from "../service";
-import { mockCategoryFindMany, mockDeleteCategory, mockCreateCategory } from "../__mocks__/@prisma/client";
+import { mockCategoryFindMany, mockDeleteCategory, mockCreateCategory } from "../../__mocks__/@prisma/client";
 
 
 // jest.mock("@prisma/client", () => {
