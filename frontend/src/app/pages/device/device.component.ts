@@ -6,6 +6,7 @@ import { Device } from '../../models/device.model';
 import { DeviceService } from '../../services/device.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeviceDialogComponent } from '../../components/device-dialog/device-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-device',
@@ -21,7 +22,8 @@ export class DeviceComponent implements OnInit {
   devices: Device[] = []
   constructor(
     private deviceService: DeviceService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
   
   ngOnInit(): void {
@@ -46,12 +48,30 @@ export class DeviceComponent implements OnInit {
     });
   }
 
+  showMessage(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['snacbar-success']
+    })
+  }
+
   createDevice(device: Omit<Device, "id">) {
     this.deviceService.createDevice(device).subscribe({
       next: () => this.loadDevices(),
-      error(err) {
-          
+      error: (err) => {
+        this.showMessage(err.message || "Error creating device")
       },
+    })
+  }
+
+  deleteDevice(id: number) {
+    this.deviceService.deleteDevice(id).subscribe({
+      next: () => this.loadDevices(),
+      error: (err) => {
+        this.showMessage(err.message || "Error deleting device")
+      }
     })
   }
   displayedColumns: string[] = ['id', 'categoryId', 'color', 'partNumber', 'actions']

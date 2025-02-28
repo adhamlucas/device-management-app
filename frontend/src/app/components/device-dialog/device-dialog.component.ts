@@ -17,7 +17,6 @@ export function numberValidator(): ValidatorFn {
   };
 }
 
-
 @Component({
   selector: 'app-device-dialog',
   imports: [
@@ -41,7 +40,7 @@ export class DeviceDialogComponent implements OnInit {
       Validators.required,
       Validators.maxLength(16)
     ]),
-    partNumber: new FormControl<number | null>(null, [
+    partNumber: new FormControl<string>('', [
       Validators.required,
       Validators.min(0),
       numberValidator(),
@@ -59,13 +58,17 @@ export class DeviceDialogComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.dialogRef.close(); // Fecha o modal sem salvar
+    this.dialogRef.close();
   }
 
   onSave(): void {
     if (this.deviceForm.valid) {
       const formData = this.deviceForm.value
-      this.dialogRef.close(formData);
+      this.dialogRef.close({
+        color: formData.color,
+        categoryId: formData.categoryId,
+        partNumber: parseInt(formData.partNumber as string)
+      });
     }
   }
 
@@ -77,15 +80,4 @@ export class DeviceDialogComponent implements OnInit {
       }
     })
   }
-
-  onPartNumberChange(value: string): void {
-    const parsedValue = Number(value);
-  
-    if (!isNaN(parsedValue) && parsedValue >= 0) {
-      this.deviceForm.patchValue({
-        partNumber: parsedValue
-      });
-    }
-  }
-
 }

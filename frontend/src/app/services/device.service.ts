@@ -19,4 +19,8 @@ export class DeviceService {
   createDevice(device: Omit<Device, "id">) {
     return this.http.post<Device>(this.apiUrl, device)
   }
+
+  deleteDevice(id: number) {
+    return this.http.delete<Device>(`${this.apiUrl}/${id}`)
+  }
 }

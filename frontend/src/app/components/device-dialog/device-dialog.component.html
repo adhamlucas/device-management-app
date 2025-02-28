@@ -11,7 +11,7 @@
         </mat-error>
       }
   
-      @if (deviceForm.get('color')?.hasError("maxLength")) {
+      @if (deviceForm.get('color')?.hasError('maxlength')) {
         <mat-error>
           Device color must be at maximum 16 carachters
         </mat-error>
@@ -20,7 +20,7 @@
   
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Device Part Number</mat-label>
-      <input matInput formControlName="partNumber" (ngModelChange)="onPartNumberChange($event)" />
+      <input matInput formControlName="partNumber" />
   
       @if (deviceForm.get('partNumber')?.hasError("required")) {
         <mat-error>
@@ -42,7 +42,7 @@
       }
     </mat-form-field>
   
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Select a Category</mat-label>
       <mat-select formControlName="categoryId">
          @for (category of categories;  track category.id) {
