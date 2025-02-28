@@ -22,9 +22,14 @@ class CategoryController {
   }
 
   async deleteCategory(req: Request, res: Response) {
-    const id = parseInt(req.params.id)
-    const category = await this.categoryService.delete(id)
-    res.status(200).json(category)
+    const { id } = req.params;
+    
+    try {
+      const category = await this.categoryService.delete(Number(id));
+      res.status(204).json(category); // Sucesso, sem conteúdo
+    } catch (e: any) {
+      res.status(400).json({ error: e.message });
+    }
   }
 }
 

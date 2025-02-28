@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 class CategoryService {
@@ -15,12 +15,22 @@ class CategoryService {
   }
 
   async delete(id: number) {
-    return await prisma.category.delete({
-      where: {
-        id,
+    try {
+      return await prisma.category.delete({
+        where: {
+          id,
+        }
+      })
+    } catch(e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        // The .code property can be accessed in a type-safe manner
+        if (e.code === 'P2003') {
+          throw new Error(`Cannot delete category because it is in use.`);
+        }
       }
-    })
+      throw e
+    }
   }
 }
 
-export default CategoryService;
+export default CategoryService
