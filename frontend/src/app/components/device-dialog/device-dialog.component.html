@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>Create Device</h2>
+<mat-dialog-content>
+  <form [formGroup]="deviceForm">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Device Color</mat-label>
+      <input matInput formControlName="color" />
+  
+      @if (deviceForm.get('color')?.hasError("required")) {
+        <mat-error>
+          Device color is required
+        </mat-error>
+      }
+  
+      @if (deviceForm.get('color')?.hasError('maxlength')) {
+        <mat-error>
+          Device color must be at maximum 16 carachters
+        </mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Device Part Number</mat-label>
+      <input matInput formControlName="partNumber" />
+  
+      @if (deviceForm.get('partNumber')?.hasError("required")) {
+        <mat-error>
+          Part Number is required
+        </mat-error>
+      }
+  
+      @if (deviceForm.get('partNumber')?.hasError("min")) {
+        <mat-error>
+          Part Number must be positive
+        </mat-error>
+      }
+
+        
+      @if (deviceForm.get('partNumber')?.hasError("notANumber")) {
+        <mat-error>
+          Part Number must be a number
+        </mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Select a Category</mat-label>
+      <mat-select formControlName="categoryId">
+         @for (category of categories;  track category.id) {
+           <mat-option [value]="category.id">
+             {{ category.name }}
+           </mat-option>
+         }
+      </mat-select>
+    
+      <!-- Exibição de erro se a validação falhar -->
+       @if (deviceForm.get('categoryId')) {
+         <mat-error>
+           A category is required
+         </mat-error>
+       }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onSave()">Save</button>
+</mat-dialog-actions>

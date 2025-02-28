@@ -22,8 +22,7 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
     MatInput,
     ReactiveFormsModule
   ],
-
-  styleUrls: ['./category-dialog.component.scss']
+  styleUrls: ['./category-dialog.component.css']
 })
 export class CategoryDialogComponent {
   categoryName = new FormControl('', Validators.required);
