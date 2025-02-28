@@ -15,4 +15,8 @@ export class DeviceService {
   getDevices(): Observable<Device[]> {
     return this.http.get<Device[]>(this.apiUrl);
   }
+
+  createDevice(device: Omit<Device, "id">) {
+    return this.http.post<Device>(this.apiUrl, device)
+  }
 }
