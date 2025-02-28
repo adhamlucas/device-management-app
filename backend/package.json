@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "NODE_ENV=production tsc",
     "start": "node dist/app.js",
     "dev": "nodemon",
     "test": "jest"
