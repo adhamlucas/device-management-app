@@ -1,0 +1,10 @@
+.table-header {
+  margin-bottom: 16px; /* Espaço entre o cabeçalho e a tabela */
+  display: flex;
+  justify-content: flex-end; /* Alinha o botão à direita */
+}
+
+
+.mat-column-actions {
+  text-align: center;
+}
